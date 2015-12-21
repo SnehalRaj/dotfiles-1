@@ -1,0 +1,9 @@
+[user]
+	email = yashsriv@iitk.ac.in
+	name = Yash Srivastav
+[core]
+	editor = vim
+[diff]
+  tool = vimdiff
+[color]
+	ui = true
