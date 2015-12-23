@@ -180,9 +180,10 @@ fi
 if [ "$color_prompt" = yes ]; then
   PS1="${debian_chroot:+($debian_chroot)}"               # For debian
   PS1="${PS1}$txtgrn\u$txtrst:"                          # Username in green color appended
-  PS1="${PS1}$litblu\w"                           # Working directory in dim blue color appended
-  PS1="${PS1}$litred\`parse_git_branch\`"         # Git status of directory in red color appended
-  PS1="${PS1}$litylw\$ $txtrst"                          # Added $ prompt in ilight yellow color
+  PS1="${PS1}$litblu\w"                                  # Working directory in dim blue color appended
+  PS1="${PS1}$litred\`parse_git_branch\`"                # Git status of directory in red color appended
+  PS1="${PS1}$litylw\$ $txtrst"                          # Added $ prompt in light yellow color
+  PS2="$litylw> $txtrst"                                 # Colored secondary prompt
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '    # Useless normal prompt
 fi
@@ -244,4 +245,13 @@ fi
 # 07. Extras                                                                                                  #
 ###############################################################################################################
 
-# None as of Now
+# Archey
+if [ -f /usr/bin/archey ]; then
+  archey
+else
+  sudo apt-get install lsb-release scrot
+  wget http://github.com/downloads/djmelik/archey/archey-0.2.8.deb
+  sudo dpkg -i archey-0.2.8.deb
+  rm archey-0.2.8.deb
+  archey
+fi
