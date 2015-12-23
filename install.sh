@@ -32,20 +32,35 @@ for file in $files; do
   echo "Done."
 done
 
-# Install archey
-if [ -f /usr/bin/archey ]; then
-  echo -n "Good, you already have archey installed."
-else
-  echo -n "Do you want to install archey?(Y/n) "
-  read -n 1 opt
-  if [ "$opt" == "N" || "$opt" == "n" ]; then
-    echo -n "Archey will not be installed."
+install_screenfetch() {
+# Check if screenfetch is already installed
+  if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
+    echo "Good, you already have screenfetch installed."
   else
-    sudo apt-get install lsb-release scrot
-    wget http://github.com/downloads/djmelik/archey/archey-0.2.8.deb
-    sudo dpkg -i archey-0.2.8.deb
-    rm archey-0.2.8.debi
-    echo -n "Archey has been installed."
+    echo -n "Do you want to install ScreenFetch?(Y/n) "
+    read -n 1 opt
+    if [ "$opt" = "n" ]; then
+      echo ""
+      echo "ScreenFetch will not be installed."
+    elif [ "$opt" = "N" ]; then
+      echo "ScreenFetch will not be installed."
+    else
+      platform=$(uname);
+      if [[ $platform == 'Linux' ]]; then
+        if [[ -f /etc/redhat-release ]]; then
+          sudo yum install screenfetch
+          echo "ScreenFetch has been installed."
+        elif [[ -f /etc/debian_version ]]; then
+          sudo apt-get install screenfetch
+          echo "ScreenFetch has been installed."
+        else
+          echo "Please install ScreenFetch on your own."
+        fi
+      else
+        echo "Please install ScreenFetch on your own."
+      fi
+    fi
   fi
-fi
-echo -n "Yash's dotfiles installation complete."
+}
+install_screenfetch
+echo "Yash's dotfiles installation complete."

@@ -36,3 +36,30 @@ for file in $files; do
     echo "Done."
   fi
 done
+
+
+uninstall_screenfetch() {
+# Check if screenfetch is installed
+  if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
+    echo -n "Do you want to uninstall ScreenFetch?(N/y) "
+    read -n 1 opt
+    if [ "$opt" = "y" -o "$opt" = "Y" ]; then
+      platform=$(uname);
+      if [[ $platform == 'Linux' ]]; then
+        if [[ -f /etc/redhat-release ]]; then
+          sudo yum remove screenfetch
+          echo "ScreenFetch has been uninstalled."
+        elif [[ -f /etc/debian_version ]]; then
+          sudo apt-get remove screenfetch
+          echo "ScreenFetch has been uninstalled."
+        else
+          echo "Please uninstall ScreenFetch on your own."
+        fi
+      else
+        echo "Please uninstall ScreenFetch on your own."
+      fi
+    fi
+  fi
+}
+uninstall_screenfetch
+echo "Yash's dotfiles uninstallation complete."

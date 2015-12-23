@@ -245,7 +245,9 @@ fi
 # 07. Extras                                                                                                  #
 ###############################################################################################################
 
-# Run Archey on start
-if [ -f /usr/bin/archey ]; then
-  archey
+# Run ScreenFetch on start
+if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
+  tput rmam
+  screenfetch
+  tput smam
 fi
