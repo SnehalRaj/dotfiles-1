@@ -22,7 +22,7 @@ echo -n "Changing to the %dir directory ..."
 cd $dir
 echo "Done."
 
-#Perform Installation
+# Perform Installation
 for file in $files; do
   echo -n "Moving any existing .$file to $olddir ..."
   mv ~/.$file $olddir/
@@ -31,3 +31,21 @@ for file in $files; do
   ln -s $dir/$file ~/.$file
   echo "Done."
 done
+
+# Install archey
+if [ -f /usr/bin/archey ]; then
+  echo -n "Good, you already have archey installed."
+else
+  echo -n "Do you want to install archey?(Y/n) "
+  read -n 1 opt
+  if [ "$opt" == "N" || "$opt" == "n" ]; then
+    echo -n "Archey will not be installed."
+  else
+    sudo apt-get install lsb-release scrot
+    wget http://github.com/downloads/djmelik/archey/archey-0.2.8.deb
+    sudo dpkg -i archey-0.2.8.deb
+    rm archey-0.2.8.debi
+    echo -n "Archey has been installed."
+  fi
+fi
+echo -n "Yash's dotfiles installation complete."

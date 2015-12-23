@@ -245,13 +245,7 @@ fi
 # 07. Extras                                                                                                  #
 ###############################################################################################################
 
-# Archey
+# Run Archey on start
 if [ -f /usr/bin/archey ]; then
-  archey
-else
-  sudo apt-get install lsb-release scrot
-  wget http://github.com/downloads/djmelik/archey/archey-0.2.8.deb
-  sudo dpkg -i archey-0.2.8.deb
-  rm archey-0.2.8.deb
   archey
 fi
