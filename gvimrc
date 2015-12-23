@@ -3,7 +3,7 @@ if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
 imap <S-Tab> <Plug>SuperTabBackward
-inoremap <C-Tab> 	
+inoremap <C-Tab> 
 inoremap <silent> <Plug>NERDCommenterInsert  <BS>:call NERDComment('i', "insert")
 map! <S-Insert> <MiddleMouse>
 nmap :Q :q!
