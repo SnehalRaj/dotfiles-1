@@ -123,9 +123,13 @@ if [ -n "$force_color_prompt" ]; then
 fi
 # Custom colors for prompt
 if [ "$color_prompt" = yes ]; then
-  PS1="${debian_chroot:+($debian_chroot)}\[\e[32m\]\u\[\e[0m\]:\[\e[02;34m\]\w\[\e[0m\]\`parse_git_branch\`\[\e[93m\]\$\[\e[0m\] "
+  PS1="${debian_chroot:+($debian_chroot)}"               # For debian
+  PS1="${PS1}\[\e[32m\]\u\[\e[0m\]:"                     # Username in green color appended
+  PS1="${PS1}\[\e[02;34m\]\w\[\e[0m\]"                   # Working directory in dim blue color appended
+  PS1="${PS1}\[\e[01;31m\]\`parse_git_branch\`\[\e[0m\]" # Git status of directory in red color appended
+  PS1="${PS1}\[\e[93m\]\$\[\e[0m\] "                     # Added $ prompt in yellow color
 else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '    # Useless normal prompt
 fi
 unset color_prompt force_color_prompt
 
