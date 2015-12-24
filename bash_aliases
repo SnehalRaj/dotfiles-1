@@ -1,3 +1,4 @@
+#!/bin/bash
 ##############################################################################
 #   Filename: .bash_aliases                                                  #
 # Maintainer: Yash Srivastav <yash111998@gmail.com>                          #
@@ -14,3 +15,5 @@ alias ..='cd ..'
 alias diskspace="du -S | sort -n -r |more"
 # Shortcut for git upload
 alias gpom='git push origin master'
+# IP Address ( actual and local)
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

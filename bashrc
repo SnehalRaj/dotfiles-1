@@ -1,3 +1,4 @@
+#!/bin/bash
 ###############################################################################################################
 #   Filename: .bashrc                                                                                         #
 # Maintainer: Yash Srivastav <yash111998@gmail.com>                                                           #
@@ -46,6 +47,8 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
+# Autocorrect typos in cd
+shopt -s cdspell
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -55,7 +58,7 @@ function parse_git_branch() {
   if [ ! "${BRANCH}" == "" ]
   then
     STAT=`parse_git_dirty`
-    echo "[${BRANCH}${STAT}]"
+    echo " on ${BRANCH}[${STAT}]"
   else
     echo ""
   fi
@@ -89,11 +92,13 @@ function parse_git_dirty {
     bits="!${bits}"
   fi
   if [ ! "${bits}" == "" ]; then
-    echo " ${bits}"
+    echo "${bits}"
   else
     echo ""
   fi
 }
+
+export EDITOR="vim"
 ###############################################################################################################
 # 04. Prompt Customization                                                                                    #
 ###############################################################################################################
@@ -178,12 +183,15 @@ fi
 
 # Custom colors for prompt
 if [ "$color_prompt" = yes ]; then
+  #PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo "rc: $RET"; fi; if [ $( ls -A | wc -l ) -lt 5 ]; then echo; ls -mF; fi'
+  PROMPT_COMMAND="history -a"                            # New tabs have all history
   PS1="${debian_chroot:+($debian_chroot)}"               # For debian
+  PS1="${PS1}[\#] "                                      # Which number prompt
   PS1="${PS1}$txtgrn\u$txtrst:"                          # Username in green color appended
   PS1="${PS1}$litblu\w"                                  # Working directory in dim blue color appended
   PS1="${PS1}$litred\`parse_git_branch\`"                # Git status of directory in red color appended
-  PS1="${PS1}$litylw\$ $txtrst"                          # Added $ prompt in light yellow color
-  PS2="$litylw> $txtrst"                                 # Colored secondary prompt
+  PS1="${PS1}$litylw\\$ $txtrst"                         # Added $ prompt in light yellow color
+  PS2="$litylw > $txtrst"                                # Colored secondary prompt
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '    # Useless normal prompt
 fi
