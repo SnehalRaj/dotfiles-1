@@ -1,3 +1,8 @@
+##########################################################
+#   Filename: .gitconfig                                 #
+# Maintainer: Yash Srivastav <yash111998@gmail.com>      #
+#        URL: http://github.com/yash111998/dotfiles      #
+##########################################################
 [user]
 	email = yashsriv@iitk.ac.in
 	name = Yash Srivastav
