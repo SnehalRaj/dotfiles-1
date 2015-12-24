@@ -48,10 +48,14 @@ install_screenfetch() {
       platform=$(uname);
       if [[ $platform == 'Linux' ]]; then
         if [[ -f /etc/redhat-release ]]; then
-          sudo yum install screenfetch
+          sudo yum install lsb-release scrot
+          wget -O screenfetch "https://raw.github.com/KittyKat/screenFetch/master/screenfetch-dev"
+          chmod +x screenfetch
           echo "ScreenFetch has been installed."
         elif [[ -f /etc/debian_version ]]; then
-          sudo apt-get install screenfetch
+          sudo apt-get install lsb-release scrot
+          wget -O screenfetch "https://raw.github.com/KittyKat/screenFetch/master/screenfetch-dev"
+          chmod +x screenfetch
           echo "ScreenFetch has been installed."
         else
           echo "Please install ScreenFetch on your own."

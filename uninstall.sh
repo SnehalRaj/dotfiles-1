@@ -15,7 +15,7 @@ exist=0
 # Check if backup directory exists
 if [ ! -d "$olddir" ]; then
   echo -n "$olddir does not exist and hence nothing to restore."
-else 
+else
   echo -n "Restoring from existing backup : $olddir"
   exist=1
 fi
@@ -39,7 +39,9 @@ done
 
 
 uninstall_screenfetch() {
-# Check if screenfetch is installed
+  # Check if screenfetch is installed
+  rm ~/dotfiles/screenfetch # Remove local copy
+  # Remove global copy if installed
   if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
     echo -n "Do you want to uninstall ScreenFetch?(N/y) "
     read -n 1 opt

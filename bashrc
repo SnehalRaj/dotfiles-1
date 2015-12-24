@@ -250,4 +250,8 @@ if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
   tput rmam
   screenfetch
   tput smam
+elif [ -f ~/dotfiles/screenfetch ]; then
+  tput rmam
+  ~/dotfiles/screenfetch
+  tput smam
 fi
