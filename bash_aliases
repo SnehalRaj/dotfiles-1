@@ -17,3 +17,6 @@ alias diskspace="du -S | sort -n -r |more"
 alias gpom='git push origin master'
 # IP Address ( actual and local)
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# ADB and fastboot
+alias adb="sudo ./adb "
+alias fastboot="sudo ./fastboot "
