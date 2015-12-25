@@ -5,6 +5,8 @@
 #        URL: http://github.com/yash111998/dotfiles                          #
 #                                                                            #
 ##############################################################################
+# Allow sudo to be used by aliases
+alias sudo="sudo "
 # Get package
 alias getme='sudo apt-get install'
 # Execute previous command with sudo permissions
@@ -20,3 +22,5 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # ADB and fastboot
 alias adb="sudo ./adb "
 alias fastboot="sudo ./fastboot "
+# Shutdown
+alias shutdown="sudo shutdown now"
