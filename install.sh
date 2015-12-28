@@ -67,4 +67,5 @@ install_screenfetch() {
   fi
 }
 install_screenfetch
+chmod +x fsearch
 echo "Yash's dotfiles installation complete."

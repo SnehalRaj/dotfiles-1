@@ -98,6 +98,12 @@ function parse_git_dirty {
   fi
 }
 
+function twain {
+  quote = fortune
+  while [ quote | grep Twain ]; do
+    quote = fortune
+  done
+}
 export EDITOR="vim"
 ###############################################################################################################
 # 04. Prompt Customization                                                                                    #
@@ -256,10 +262,12 @@ fi
 # Run ScreenFetch on start
 if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
   tput rmam
+  fortune
   screenfetch
   tput smam
 elif [ -f ~/dotfiles/screenfetch ]; then
   tput rmam
+  fortune
   ~/dotfiles/screenfetch
   tput smam
 fi

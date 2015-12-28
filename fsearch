@@ -1,0 +1,10 @@
+#!/bin/bash
+# Fortune output in quote
+quote=$(fortune)
+# Search till you find it and then print it
+flag=$( echo "$quote" | grep "$1" )
+while [ $? -ne 0 ]; do
+  quote=$(fortune)
+  flag=$( echo "$quote" | grep "$1" )
+done
+echo $quote
