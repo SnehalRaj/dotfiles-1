@@ -27,4 +27,4 @@ alias shutdown='sudo shutdown now'
 # Alias for fortune
 alias woo='fortune'
 alias f='fortune'
-alias fsearch='./fsearch'
+alias fsearch='~/dotfiles/fsearch'
