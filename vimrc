@@ -12,21 +12,22 @@
 "   05. Vim UI ................. User Interface Behaviour                                                             "
 "   06. Text Formatting/Layout . Text, Tab, Indentation Related                                                       "
 "   07. Custom Key Mappings .... Custom aliases                                                                       "
+"   08. Startup Command/Message. Run certain commands and display on startup                                          "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 01. General                                                                                                         "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible                                                " be iMproved, required
+
+set nocompatible  " be iMproved, required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Vundle                                                                                                          "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 filetype off                             " required
 set rtp+=~/.vim/bundle/Vundle.vim        " set the runtime path to include Vundle and initialize
 call vundle#begin()
-" Alternatively, pass a path where Vundle should install plugins
-" Call vundle#begin('~/some/path/here')
 Plugin 'gmarik/Vundle.vim'               " Add all the plugins here
 Plugin 'scrooloose/nerdcommenter'        " Good Commenting
 Plugin 'ervandew/supertab'               " Autocomplete on Tab
@@ -43,14 +44,18 @@ call vundle#end()                        " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 03. Events                                                                                                          "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on                                          " Filetype detection[on] plugin[on] indent[on]
-autocmd FileType make setlocal noexpandtab                         " In Makefiles DO NOT use spaces instead of tabs
-autocmd FileType c setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd   " Format code as per google guidelines for c
-autocmd FileType cpp setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd " Format code as per google guidelines for cpp
+
+filetype plugin indent on                                              " Filetype detection[on] plugin[on] indent[on]
+autocmd FileType make setlocal noexpandtab                             " In Makefiles DO NOT use spaces instead of tabs
+autocmd FileType c setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd       " Format code as per google guidelines for c
+autocmd FileType cpp setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd     " Format code as per google guidelines for cpp
+autocmd FileType arduino setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd " Format code as per google guidelines for arduino
+autocmd FileType java setlocal equalprg=/usr/bin/astyle\ -A14s2pPxd    " Format code as per google guidelines for java
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 04. Theme/Colors                                                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set t_Co=256          " Enable 256-color mode
 set background=dark   " I usually work with a dark background
 syntax enable         " Enable syntax processing
@@ -59,6 +64,7 @@ colorscheme harlequin " Colorscheme Harlequin is good
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 05. Vim UI                                                                                                          "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set number                     " Show line number
 set laststatus=2               " Last window always has a statusline
 set rnu                        " Relative line numbers
@@ -78,6 +84,7 @@ set smartcase                  " Smart case matching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 06. Text Formatting/Layout                                                                                          "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set expandtab     " Expand all tabs to spaces
 set smarttab      " Insert tabs smartly
 set autoindent    " Indent properly
@@ -90,16 +97,30 @@ set nowrap        " Don't wrap text
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 07. Custom Key Mappings                                                                                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let mapleader=","
 " Easy mistake ; instead of :
-nmap ; :
-vmap ; :
+nnoremap ; :
+vnoremap ; :
 " Easily Comment out using NERDCommenter
 nmap // <leader>ci
 " Commands to properly indent the code
-nmap ../ mzgg=G`z
-imap ../ <esc>mzgg=G`za
+nnoremap ../ mzgg=G`z
+inoremap ../ <esc>mzgg=G`za
 " ,. is escape in insert mode.
-inoremap ,. <esc>
-" Easy motion plugin shortcut (find a particular letter)
-nmap ,, <leader><leader>s
-inoremap ,, <esc><leader><leader>s
+inoremap <leader>. <esc>
+" Move lines up(-) or down(_)
+noremap - ddp
+noremap _ ddkP
+" Map space to insert spaces
+nnoremap <space> li <esc>h
+" Source vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+" Edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 08. Startup Messages                                                                                                    "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+echo "\n\n\tWhere there is as Vim , There is a way.\n\n"
