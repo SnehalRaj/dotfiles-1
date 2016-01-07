@@ -28,3 +28,5 @@ alias shutdown='sudo shutdown now'
 alias woo='fortune'
 alias f='fortune'
 alias fsearch='~/dotfiles/fsearch'
+# Use python3 instead of python2
+alias python='python3 '
