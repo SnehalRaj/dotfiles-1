@@ -192,7 +192,7 @@ if [ "$color_prompt" = yes ]; then
   #PROMPT_COMMAND='RET=$?; if [ $RET != 0 ]; then echo "rc: $RET"; fi; if [ $( ls -A | wc -l ) -lt 5 ]; then echo; ls -mF; fi'
   PROMPT_COMMAND="history -a"                            # New tabs have all history
   PS1="${debian_chroot:+($debian_chroot)}"               # For debian
-  #PS1="${PS1}[\#] "                                      # Which number prompt
+  #PS1="${PS1}[\#] "                                     # Which number prompt
   PS1="${PS1}$txtgrn\u$txtrst:"                          # Username in green color appended
   PS1="${PS1}$litblu\w"                                  # Working directory in dim blue color appended
   PS1="${PS1}$litred\`parse_git_branch\`"                # Git status of directory in red color appended
@@ -259,7 +259,7 @@ fi
 # 07. Extras                                                                                                  #
 ###############################################################################################################
 
-# Run ScreenFetch on start
+# Run ScreenFetch and fortune on start
 if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
   tput rmam
   fortune

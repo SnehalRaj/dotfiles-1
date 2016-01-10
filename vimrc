@@ -19,7 +19,7 @@
 " 01. General                                                                                                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible  " be iMproved, required
+set nocompatible                " be iMproved, required
 set backspace=indent,eol,start  " Backspace behaviour is normal
 set history=1000                " Lots of history
 
@@ -36,12 +36,13 @@ Plugin 'scrooloose/nerdcommenter'        " Good Commenting
 " Plugin 'ervandew/supertab'             " Autocomplete on Tab
 Plugin 'Lokaltog/vim-easymotion'         " Easy Motion search
 Plugin 'Yggdroot/indentLine'             " Show indents
+Plugin 'suan/vim-instant-markdown'       " Display Markdown
 Plugin 'funorpain/vim-cpplint'           " Cpplint checker
 Plugin 'flazz/vim-colorschemes'          " Vim Colorschemes
 Plugin 'godlygeek/tabular'               " Table Settings
 Plugin 'scrooloose/syntastic'            " Syntax Checker
 Plugin 'Chiel92/vim-autoformat'          " AutoFormat
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'          " Autocomplete while typing
 Plugin 'bronson/vim-trailing-whitespace' " Show Trailing Spaces
 call vundle#end()                        " required
 
@@ -50,6 +51,7 @@ call vundle#end()                        " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on                                                 " Filetype detection[on] plugin[on] indent[on]
+
 augroup filetype_specific
   autocmd!
   autocmd filetype svn,*commit* setlocal spell                            " Spell Check
@@ -59,6 +61,7 @@ augroup filetype_specific
   autocmd FileType arduino setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG " Format code as per google guidelines for arduino
   autocmd FileType java setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG    " Format code as per google guidelines for java
 augroup END
+
 augroup startup
   autocmd!
   autocmd BufRead,BufNewFile * echo "\n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n"
@@ -66,6 +69,7 @@ augroup startup
   ""dont do it when writing a commit log entry
   autocmd BufReadPost * call SetCursorPosition()
 augroup END
+
 function! SetCursorPosition()
   if &filetype !~ 'svn\|commit\c'
     if line("'\"") > 0 && line("'\"") <= line("$")
