@@ -1,14 +1,14 @@
 ##########################################################
 #   Filename: .gitconfig                                 #
-# Maintainer: Yash Srivastav <yash111998@gmail.com>      #
-#        URL: http://github.com/yash111998/dotfiles      #
+# Maintainer: Yash Srivastav <yashsriv01@gmail.com>      #
+#        URL: http://github.com/yashsriv/dotfiles        #
 ##########################################################
 [user]
-	email = yashsriv@iitk.ac.in
-	name = Yash Srivastav
+  email = yashsriv@iitk.ac.in
+  name = Yash Srivastav
 [core]
-	editor = vim
+  editor = vim
 [diff]
   tool = vimdiff
 [color]
-	ui = true
+  ui = true
