@@ -60,6 +60,7 @@ augroup filetype_specific
   autocmd FileType cpp setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG     " Format code as per google guidelines for cpp
   autocmd FileType arduino setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG " Format code as per google guidelines for arduino
   autocmd FileType java setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG    " Format code as per google guidelines for java
+  autocmd FileType text setlocal equalprg=/usr/bin/aspell\ -c
 augroup END
 
 augroup startup

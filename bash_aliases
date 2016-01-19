@@ -30,3 +30,5 @@ alias f='fortune'
 alias fsearch='~/dotfiles/fsearch'
 # Use python3 instead of python2
 alias python='python3 '
+# Open anything
+alias o='xdg-open 2>/dev/null'
