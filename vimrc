@@ -65,10 +65,17 @@ augroup END
 
 augroup startup
   autocmd!
-  autocmd BufRead,BufNewFile * echo "\n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n"
+  "autocmd BufRead,BufNewFile * echo \n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n
+  autocmd BufRead,BufNewFile * echo system("cat ~/dotfiles/boilerplate/start.foo")
   "jump to last cursor position when opening a file
   ""dont do it when writing a commit log entry
   autocmd BufReadPost * call SetCursorPosition()
+  autocmd BufNewFile *.c $r ~/dotfiles/boilerplate/foo.c
+  autocmd BufNewFile *.c normal kdd2ji  
+  autocmd BufNewFile *.cxx $r ~/dotfiles/boilerplate/foo.cxx
+  autocmd BufNewFile *.cxx normal kdd6j4l
+  autocmd BufNewFile *.ino $r ~/dotfiles/boilerplate/foo.ino
+  autocmd BufNewFile *.ino normal kdd2j
 augroup END
 
 function! SetCursorPosition()
