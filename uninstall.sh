@@ -8,7 +8,7 @@
 
 dir=~/dotfiles
 olddir=~/dotfiles.bak
-files="bash_aliases bashrc selected_editor gitconfig gvimrc vim vimrc"
+files="bash_aliases bashrc selected_editor gitconfig gvimrc vim vimrc zshrc"
 exist=0
 ##########
 
