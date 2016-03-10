@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "   Filename: .vimrc                                                                                                        "
 " Maintainer: Yash Srivastav <yashsriv01@gmail.com>                                                                         "
-"        URL: http://github.com/yashsriv/dotfiles                                                                         "
+"        URL: http://github.com/yashsriv/dotfiles                                                                           "
 "                                                                                                                           "
 "                                                                                                                           "
 " Sections:                                                                                                                 "
@@ -60,20 +60,22 @@ augroup filetype_specific
   autocmd FileType cpp setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG     " Format code as per google guidelines for cpp
   autocmd FileType arduino setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG " Format code as per google guidelines for arduino
   autocmd FileType java setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG    " Format code as per google guidelines for java
-  autocmd FileType text setlocal equalprg=/usr/bin/aspell\ -c
+  autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 augroup END
 
 augroup startup
   autocmd!
-  "autocmd BufRead,BufNewFile * echo \n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n
-  autocmd BufRead,BufNewFile * echo system("cat ~/dotfiles/boilerplate/start.foo")
+  autocmd BufRead,BufNewFile * echom '\n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n'
   "jump to last cursor position when opening a file
   ""dont do it when writing a commit log entry
   autocmd BufReadPost * call SetCursorPosition()
+  " Boilerplate C code
   autocmd BufNewFile *.c $r ~/dotfiles/boilerplate/foo.c
   autocmd BufNewFile *.c normal kdd2ji  
+  " Boilerplate cxx , i.e., opencv IP code
   autocmd BufNewFile *.cxx $r ~/dotfiles/boilerplate/foo.cxx
   autocmd BufNewFile *.cxx normal kdd6j4l
+  " Boilerplate ino code
   autocmd BufNewFile *.ino $r ~/dotfiles/boilerplate/foo.ino
   autocmd BufNewFile *.ino normal kdd2j
 augroup END
@@ -89,6 +91,7 @@ function! SetCursorPosition()
   endif
 endfunction
 
+set ff=unix
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 04. Theme/Colors                                                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,7 +154,8 @@ let mapleader=","
 nnoremap ; :
 vnoremap ; :
 " Easily Comment out using NERDCommenter
-nmap // <leader>ci
+nmap // <leader>c<space>
+vmap // <leader>cs
 " Commands to properly indent the code
 nnoremap ../ mzgg=G`z
 inoremap ../ <esc>mzgg=G`za
@@ -168,6 +172,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " Indent Lines
 nnoremap <tab> i<tab><esc>
+" Remove Highlight
+nnoremap <leader><leader>c :noh<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 08. Statusline Modding                                                                                                  "
