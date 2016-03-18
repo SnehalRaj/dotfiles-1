@@ -44,6 +44,7 @@ Plugin 'scrooloose/syntastic'            " Syntax Checker
 Plugin 'Chiel92/vim-autoformat'          " AutoFormat
 Plugin 'Valloric/YouCompleteMe'          " Autocomplete while typing
 Plugin 'bronson/vim-trailing-whitespace' " Show Trailing Spaces
+"Plugin 'LaTeX-Box-Team/LaTeX-Box'        " LaTeX plugin
 call vundle#end()                        " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,11 +62,12 @@ augroup filetype_specific
   autocmd FileType arduino setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG " Format code as per google guidelines for arduino
   autocmd FileType java setlocal equalprg=/usr/bin/astyle\ -A14s2pHUxG    " Format code as per google guidelines for java
   autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+  autocmd FileType tex nnoremap <CR> :w \| let x=system('pdflatex ' . expand('%:r') . '.tex ; evince ' . expand('%:r') . '.pdf &')<CR><CR>
+  autocmd FileType html nnoremap <CR> :w \| let x=system('midori ' . expand('%:r') . '.html &')<CR><CR>
 augroup END
 
 augroup startup
   autocmd!
-  autocmd BufRead,BufNewFile * echom '\n\tWhere there is a Vim , There is a way.\n\n\n\n\n\n\n\n\n\n\n'
   "jump to last cursor position when opening a file
   ""dont do it when writing a commit log entry
   autocmd BufReadPost * call SetCursorPosition()
