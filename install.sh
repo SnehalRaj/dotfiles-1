@@ -32,6 +32,14 @@ for file in $files; do
   echo "Done."
 done
 
+echo -n "Moving any existing nvim to $olddir ..."
+mv ~/.config/nvim $olddir/
+echo "Done."
+echo -n "Creating symlink for nvim ..."
+ln -s $dir/nvim ~/.config/nvim
+ln -s $dir/vimrc ~/.config/nvim/init.vim
+echo "Done."
+
 install_screenfetch() {
 # Check if screenfetch is already installed
   if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then

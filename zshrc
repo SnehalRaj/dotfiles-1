@@ -96,3 +96,4 @@ elif [ -f ~/dotfiles/screenfetch ]; then
   ~/dotfiles/screenfetch
   tput smam
 fi
+TERM=xterm-256color

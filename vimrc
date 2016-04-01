@@ -19,22 +19,42 @@
 " 01. General                                                                                                               "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible                " be iMproved, required
-set backspace=indent,eol,start  " Backspace behaviour is normal
-set history=1000                " Lots of history
-
-
+set backspace=indent,eol,start      " Backspace behaviour is normal
+set history=10000                    " Lots of history
+if has('nvim')
+  let s:editor_root=expand("~/.nvim")
+else
+  set nocompatible                    " be iMproved, required
+  let s:editor_root=expand("~/.vim")
+endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Vundle                                                                                                                "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype off                             " required
-set rtp+=~/.vim/bundle/Vundle.vim        " set the runtime path to include Vundle and initialize
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'               " Add all the plugins here
+
+" Setting up Vundle - the vim plugin bundler
+let vundle_installed=1
+let vundle_readme=s:editor_root . '/bundle/Vundle.vim/README.md'
+" If readme file is absent, install vundle
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent call mkdir(s:editor_root . '/bundle', "p")
+  silent execute "!git clone https://github.com/VundleVim/Vundle.vim.git " .
+  s:editor_root . "/bundle/Vundle.vim"
+  let vundle_installed=0
+endif
+" add vundle to rtp
+let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle.vim/'
+
+call vundle#begin(s:editor_root . '/bundle/')
+Plugin 'VundleVim/Vundle.vim'            " Add all the plugins here
 Plugin 'scrooloose/nerdcommenter'        " Good Commenting
-" Plugin 'ervandew/supertab'             " Autocomplete on Tab
+Plugin 'scrooloose/nerdtree'             " File Browsing
+Plugin 'vim-airline/vim-airline'         " Powerful statusline
 Plugin 'Lokaltog/vim-easymotion'         " Easy Motion search
+Plugin 'majutsushi/tagbar'               " Tagbar ( Display info on structure of code)
 Plugin 'Yggdroot/indentLine'             " Show indents
 Plugin 'suan/vim-instant-markdown'       " Display Markdown
 Plugin 'funorpain/vim-cpplint'           " Cpplint checker
@@ -42,10 +62,30 @@ Plugin 'flazz/vim-colorschemes'          " Vim Colorschemes
 Plugin 'godlygeek/tabular'               " Table Settings
 Plugin 'scrooloose/syntastic'            " Syntax Checker
 Plugin 'Chiel92/vim-autoformat'          " AutoFormat
+"if has('nvim')
+  "Plugin 'ervandew/supertab'               " Autocomplete on Tab
+"else
+"endif
 Plugin 'Valloric/YouCompleteMe'          " Autocomplete while typing
 Plugin 'bronson/vim-trailing-whitespace' " Show Trailing Spaces
-"Plugin 'LaTeX-Box-Team/LaTeX-Box'        " LaTeX plugin
+Plugin 'Shougo/unite.vim'                " Somethong very powerful(trying to learn)
+"Plugin 'LaTeX-Box-Team/LaTeX-Box'       " LaTeX plugin
 call vundle#end()                        " required
+
+if vundle_installed == 0
+  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  :PluginInstall
+endif
+
+" YCM settings for less irritating behaviour
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 1
+
+" Airline Settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts  = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 03. Events                                                                                                                "
@@ -80,7 +120,39 @@ augroup startup
   " Boilerplate ino code
   autocmd BufNewFile *.ino $r ~/dotfiles/boilerplate/foo.ino
   autocmd BufNewFile *.ino normal kdd2j
+  " Open NERDTree on startup
+  autocmd vimenter * NERDTree
+  " Hide it from view
+  autocmd vimenter * call DecideNERDTree()
+  autocmd vimenter * Tagbar
+  autocmd vimenter * call DecideTagbar()
 augroup END
+
+
+augroup close
+  autocmd!
+  " Close vim if nerd tree is the only remaining buffer
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " Close all open side splits before deleting a buffer else vim crashes
+  autocmd BufWipeout * call CloseAllSplits()
+augroup END
+
+function! CloseAllSplits()
+  TagbarClose
+  NERDTreeClose
+endfunction
+
+function! DecideTagbar()
+  if winwidth(0)<=80
+    TagbarToggle
+  endif
+endfunction
+
+function! DecideNERDTree()
+  if winwidth(0)<=80
+    NERDTreeToggle
+  endif
+endfunction
 
 function! SetCursorPosition()
   if &filetype !~ 'svn\|commit\c'
@@ -111,7 +183,7 @@ set number                     " Show line number
 set rnu                        " Relative line numbers
 set cul                        " Highlight Current Line
 set showcmd                    " Show command in bottom bar
-set showmode                   " Show current mode
+"set showmode                   " Show current mode
 filetype indent on             " Load filetype specific indent files
 set wildmode=longest:list,full " Autocomplete on command line
 set wildmenu                   " Enable ctrl-n and ctrl-p to scroll through matches
@@ -127,7 +199,9 @@ set hlsearch                   " Highlight matches
 set ignorecase                 " Case insensitive matching
 set smartcase                  " Smart case matching
 set list                       " Display all chars
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,eol:¬
+set splitright
+"set splitbelow
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 06. Text Formatting/Layout                                                                                          "
@@ -176,10 +250,35 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <tab> i<tab><esc>
 " Remove Highlight
 nnoremap <leader><leader>c :noh<cr>
+" Directory Movement
+"nnoremap <leader><leader>d :leftabove vsplit .<CR><C-w>l:vertical resize<CR><C-w>h
+nnoremap <leader><leader>d :NERDTreeToggle<CR>
+" Tagbar
+nnoremap <leader><leader>t :TagbarToggle<CR>
+" Window Movement in insert mode
+inoremap <C-w> <C-o><C-w>
+" Save file as superuser
+command! WR :execute ':silent w !sudo tee % > /dev/null' | :edit!
+" Next buffer
+nnoremap bn :bnext<CR>
+" Previous buffer
+nnoremap bp :bprev<CR>
+" Close buffer
+nnoremap bd :call CloseAllSplits()<CR>:bd<CR>
+" Till I get internet back
+"inoremap <Tab> <C-n>
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+if has('nvim')
+  nnoremap <leader>t :terminal<CR>
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 08. Statusline Modding                                                                                                  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Normal Status Line
 
 " Display Filename
 set statusline=%<%#identifier#
@@ -218,5 +317,38 @@ set statusline+=%=
 set statusline+=%-14.(%c%V\ ,\ %l/%L%)\ %P
 
 set laststatus=2               " Last window always has a statusline
+
+
+" Airline
+
+"let g:airline_section_a = airline#section#create(['mode', 'crypt', 'paste', 'spell', 'iminsert'])
+"let g:airline_section_b = airline#section#create(['hunks', 'branch'])
+let g:airline_section_c = airline#section#create(['%t'])
+"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
+"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
+"let g:airline_section_gutter = airline#section#create(['readonly'])
+"let options_section_x = ['tagbar', 'filetype']
+"if exists('*env#statusline')
+"call add(options_section_x, '%{GitBranchInfoString()}')
+"endif
+let options_section_y = []
+let g:airline_section_y = airline#section#create(options_section_y)
+"if echom %{&fenc!='utf-8'&&&fenc!='':
+"call add(options_section_y, '%{&fenc}')
+"endif
+"if %{&ff!='unix'}
+"let g:airline_section_x = airline#section#create(options_section_x)
+"let g:airline_section_y = airline#section#create(['%{&fenc}', '[%{&ff}]'])
+"let g:airline_section_z = airline#section#create(['%P ', g:airline_symbols.linenr, ' %l : %c'])
+"let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic', 'eclim'])
+"let g:airline_section_warning = airline#section#create(['ycm_warning_count', 'whitespace'])
+"let options_section_error=%{SyntasticStatuslineFlag()}
+"augroup plugins_after_entering
+"autocmd VimEnter *
+"if youcompleteme#GetErrorCount():
+"let g:airline_section_error = airline#section#create(['%{youcompleteme#GetErrorCount()}', '%{SyntasticStatuslineFlag()}'])
+"endif
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
