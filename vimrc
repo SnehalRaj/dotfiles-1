@@ -53,6 +53,7 @@ Plugin 'VundleVim/Vundle.vim'            " Add all the plugins here
 Plugin 'scrooloose/nerdcommenter'        " Good Commenting
 Plugin 'scrooloose/nerdtree'             " File Browsing
 Plugin 'vim-airline/vim-airline'         " Powerful statusline
+Plugin 'yashsriv/vim-airline-harlequin'  " My own colorscheme
 Plugin 'Lokaltog/vim-easymotion'         " Easy Motion search
 Plugin 'majutsushi/tagbar'               " Tagbar ( Display info on structure of code)
 Plugin 'Yggdroot/indentLine'             " Show indents
@@ -62,10 +63,7 @@ Plugin 'flazz/vim-colorschemes'          " Vim Colorschemes
 Plugin 'godlygeek/tabular'               " Table Settings
 Plugin 'scrooloose/syntastic'            " Syntax Checker
 Plugin 'Chiel92/vim-autoformat'          " AutoFormat
-"if has('nvim')
-  "Plugin 'ervandew/supertab'               " Autocomplete on Tab
-"else
-"endif
+"Plugin 'ervandew/supertab'               " Autocomplete on Tab
 Plugin 'Valloric/YouCompleteMe'          " Autocomplete while typing
 Plugin 'bronson/vim-trailing-whitespace' " Show Trailing Spaces
 Plugin 'Shougo/unite.vim'                " Somethong very powerful(trying to learn)
@@ -324,8 +322,6 @@ set laststatus=2               " Last window always has a statusline
 "let g:airline_section_a = airline#section#create(['mode', 'crypt', 'paste', 'spell', 'iminsert'])
 "let g:airline_section_b = airline#section#create(['hunks', 'branch'])
 let g:airline_section_c = airline#section#create(['%t'])
-"set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-"set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
 "let g:airline_section_gutter = airline#section#create(['readonly'])
 "let options_section_x = ['tagbar', 'filetype']
 "if exists('*env#statusline')
@@ -333,22 +329,10 @@ let g:airline_section_c = airline#section#create(['%t'])
 "endif
 let options_section_y = []
 let g:airline_section_y = airline#section#create(options_section_y)
-"if echom %{&fenc!='utf-8'&&&fenc!='':
-"call add(options_section_y, '%{&fenc}')
-"endif
-"if %{&ff!='unix'}
 "let g:airline_section_x = airline#section#create(options_section_x)
 "let g:airline_section_y = airline#section#create(['%{&fenc}', '[%{&ff}]'])
 "let g:airline_section_z = airline#section#create(['%P ', g:airline_symbols.linenr, ' %l : %c'])
 "let g:airline_section_error = airline#section#create(['ycm_error_count', 'syntastic', 'eclim'])
 "let g:airline_section_warning = airline#section#create(['ycm_warning_count', 'whitespace'])
-"let options_section_error=%{SyntasticStatuslineFlag()}
-"augroup plugins_after_entering
-"autocmd VimEnter *
-"if youcompleteme#GetErrorCount():
-"let g:airline_section_error = airline#section#create(['%{youcompleteme#GetErrorCount()}', '%{SyntasticStatuslineFlag()}'])
-"endif
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
