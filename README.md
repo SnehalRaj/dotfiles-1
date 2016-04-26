@@ -1,15 +1,15 @@
 # TODO
-* Complete Overhaul @sakshamsharma style
-* Switch to vim-plug/dein... To be decided
-* neocomplete/deoplete/YCM.. decisions decisions
+* Complete Overhaul @sakshamsharma style Done
+* Switch to vim-plug/dein... To be decided Done
+* neocomplete/deoplete/YCM.. decisions decisions Done
 
 # Decisions
-* AutoComplPop
-* neomake
+* AutoComplPop Done
+* neomake Abandoned
 * zeavim & zeal
 * octol/vim-cpp-highlight
-* lervag/vimtex
-* see syntastic config
+* lervag/vimtex 
+* see syntastic config Abandonedd
 
 # Yash's dotfiles
 Contains the following dotfiles:
