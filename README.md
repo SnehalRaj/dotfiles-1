@@ -1,9 +1,14 @@
+# TODO
+* Complete Overhaul @sakshamsharma style
+* Switch to vim-plug/dein... To be decided
+* neocomplete/deoplete/YCM.. decisions decisions
+
 # Yash's dotfiles
 Contains the following dotfiles:
 * .bashrc      : My custom bashrc
 * .bash_aliases: My custum aliases
 * .zshrc       : custom zshrc
-* .conkyrc     : nothing much :P
+* .conkyrc     : nothing at all :P
 * .selected_editor
 * .vimrc : the reason for my existence
 * .gitconfig

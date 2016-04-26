@@ -7,7 +7,7 @@
   email = yashsriv01@gmail.com
   name = Yash Srivastav
 [core]
-  editor = vim
+  editor = /usr/local/bin/nvim
 [diff]
   tool = vimdiff
 [color]
