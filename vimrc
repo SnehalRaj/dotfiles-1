@@ -52,8 +52,8 @@ call vundle#begin(s:editor_root . '/bundle/')
 Plugin 'VundleVim/Vundle.vim'            " Add all the plugins here
 Plugin 'scrooloose/nerdcommenter'        " Good Commenting
 Plugin 'scrooloose/nerdtree'             " File Browsing
-Plugin 'vim-airline/vim-airline'         " Powerful statusline
 Plugin 'yashsriv/vim-airline-harlequin'  " My own colorscheme
+Plugin 'vim-airline/vim-airline'         " Powerful statusline
 Plugin 'Lokaltog/vim-easymotion'         " Easy Motion search
 Plugin 'majutsushi/tagbar'               " Tagbar ( Display info on structure of code)
 Plugin 'Yggdroot/indentLine'             " Show indents
@@ -67,6 +67,7 @@ Plugin 'Chiel92/vim-autoformat'          " AutoFormat
 Plugin 'Valloric/YouCompleteMe'          " Autocomplete while typing
 Plugin 'bronson/vim-trailing-whitespace' " Show Trailing Spaces
 Plugin 'Shougo/unite.vim'                " Somethong very powerful(trying to learn)
+Plugin 'ap/vim-css-color'                " Colored css
 "Plugin 'LaTeX-Box-Team/LaTeX-Box'       " LaTeX plugin
 call vundle#end()                        " required
 
@@ -84,6 +85,8 @@ let g:ycm_add_preview_to_completeopt = 1
 " Airline Settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts  = 1
+let g:airline_theme="harlequin"
+let g:ycm_semantic_triggers={'html': ['<', '</'], 'css': [ 're!^\s{4}', 're!:\s+' ]}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 03. Events                                                                                                                "
@@ -102,6 +105,9 @@ augroup filetype_specific
   autocmd FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
   autocmd FileType tex nnoremap <CR> :w \| let x=system('pdflatex ' . expand('%:r') . '.tex ; evince ' . expand('%:r') . '.pdf &')<CR><CR>
   autocmd FileType html nnoremap <CR> :w \| let x=system('midori ' . expand('%:r') . '.html &')<CR><CR>
+  autocmd FileType html setlocal equalprg=js-beautify\ -s\ 2\ --html      " Format html
+  autocmd FileType javascript setlocal equalprg=js-beautify\ -s\ 2        " Format js
+  autocmd FileType css setlocal equalprg=js-beautify\ -s\ 2\ --css        " Format css
 augroup END
 
 augroup startup
@@ -122,8 +128,8 @@ augroup startup
   autocmd vimenter * NERDTree
   " Hide it from view
   autocmd vimenter * call DecideNERDTree()
-  autocmd vimenter * Tagbar
-  autocmd vimenter * call DecideTagbar()
+  "autocmd vimenter * Tagbar
+  "autocmd vimenter * call DecideTagbar()
 augroup END
 
 
