@@ -3,6 +3,14 @@
 * Switch to vim-plug/dein... To be decided
 * neocomplete/deoplete/YCM.. decisions decisions
 
+# Decisions
+* AutoComplPop
+* neomake
+* zeavim & zeal
+* octol/vim-cpp-highlight
+* lervag/vimtex
+* see syntastic config
+
 # Yash's dotfiles
 Contains the following dotfiles:
 * .bashrc      : My custom bashrc
