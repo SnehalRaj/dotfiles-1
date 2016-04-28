@@ -1,1 +1,1 @@
-source ~/.vim/bar.vim
+vim/init.vim
