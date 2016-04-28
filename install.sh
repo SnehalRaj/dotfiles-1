@@ -37,7 +37,6 @@ mv ~/.config/nvim $olddir/
 echo "Done."
 echo -n "Creating symlink for nvim ..."
 ln -s $dir/nvim ~/.config/nvim
-ln -s $dir/vimrc ~/.config/nvim/init.vim
 echo "Done."
 
 install_screenfetch() {
