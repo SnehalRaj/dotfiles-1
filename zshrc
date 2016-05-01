@@ -54,7 +54,7 @@ ZSH_CUSTOM=~/dotfiles/zsh-custom
 plugins=(bower git catimg debian pip sudo web-search zsh-syntax-highlighting)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:.:/home/yash/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:.:/home/yash/bin:/usr/local/share/scala/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -96,4 +96,5 @@ elif [ -f ~/dotfiles/screenfetch ]; then
   ~/dotfiles/screenfetch
   tput smam
 fi
-TERM=xterm-256color
+#$SCALA_HOME='/usr/local/share/scala/'
+#$PATH=$PATH:$SCALA_HOME/bin
