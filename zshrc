@@ -5,8 +5,7 @@ export ZSH=~/dotfiles/oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="yash"
-#ZSH_THEME="clean"
+ZSH_THEME="yashpl"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -96,5 +95,3 @@ elif [ -f ~/dotfiles/screenfetch ]; then
   ~/dotfiles/screenfetch
   tput smam
 fi
-#$SCALA_HOME='/usr/local/share/scala/'
-#$PATH=$PATH:$SCALA_HOME/bin
