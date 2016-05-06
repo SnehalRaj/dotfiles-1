@@ -85,13 +85,15 @@ fi
 
 # Run ScreenFetch and fortune on start
 if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
-  tput rmam
   fortune -s
-  screenfetch
+  echo ''
+  tput rmam
+  screenfetch -c 154,
   tput smam
 elif [ -f ~/dotfiles/screenfetch ]; then
-  tput rmam
   fortune -s
-  ~/dotfiles/screenfetch
+  echo ''
+  tput rmam
+  ~/dotfiles/screenfetch -c 154,
   tput smam
 fi

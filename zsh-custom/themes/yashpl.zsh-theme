@@ -104,7 +104,7 @@ prompt_git() {
     if [[ -n $dirty ]]; then
       prompt_segment 214 16
     else
-      prompt_segment 112 16
+      prompt_segment 154 16
     fi
     echo -n $(git_prompt_info)
   fi
@@ -133,7 +133,7 @@ prompt_status() {
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 
-  [[ -n "$symbols" ]] && prompt_segment 16 default "$symbols"
+  [[ -n "$symbols" ]] && prompt_segment default default "$symbols"
 }
 
 ## Main prompt
@@ -216,10 +216,14 @@ prompt_battery() {
 # - Current time
 prompt_time() {
   local symbols
-  symbols=()
-  [[ -n $SSH_CLIENT ]] && symbols+="⌚"
+  symbols=""
+  if [[ -n $SSH_CLIENT ]]; then
+    symbols+=""
+  else
+    symbols+="⌚"
+  fi
 
-  prompt_segment_backwards 197 default "$symbols %*"
+  prompt_segment_backwards 232 197 " $symbol  %*"
 }
 
 ## R prompt
