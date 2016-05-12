@@ -97,3 +97,6 @@ elif [ -f ~/dotfiles/screenfetch ]; then
   ~/dotfiles/screenfetch -c 154,
   tput smam
 fi
+
+BROWSER=iceweasel
+TERM=xterm-256color
