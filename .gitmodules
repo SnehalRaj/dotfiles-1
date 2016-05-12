@@ -6,6 +6,6 @@
   path = vim
   url = git@github.com:yashsriv/vim-bar.git
 
-[submodule "i3-config"]
+[submodule "i3"]
   path = i3
-  url = git@github.com:yashsriv/i3-config.git
+  url = git@github.com:yashsriv/i3-config
