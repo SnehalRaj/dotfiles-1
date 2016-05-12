@@ -43,6 +43,3 @@ customize=/home/yash/.oh-my-zsh/custom
 alias utorrent='cd /opt/utorrent/ && sudo ./utserver '
 # NeoVim
 alias vim='nvim'
-#Scala
-alias scalac='scalac -d .classes'
-alias scala='scala -cp .classes'

@@ -70,7 +70,7 @@ prompt_segment_backwards() {
 # End the prompt, closing any open segments
 prompt_end_backwards() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}"
+    echo -n "%{%k%F{$CURRENT_BG}%}"
   else
     echo -n "%{%k%}"
   fi
@@ -111,7 +111,7 @@ prompt_git() {
 }
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment 16 154 '%c'
+  prompt_segment 234 154 '%c'
 }
 
 # Virtualenv: current working virtualenv
@@ -207,7 +207,7 @@ prompt_battery() {
       symbol="\u26A1"
       color=38
     fi
-    prompt_segment_backwards $color 16 "$symbol $(battery_charge)"
+    prompt_segment_backwards $color 234 "$symbol $(battery_charge)"
   fi
 }
 
@@ -223,7 +223,7 @@ prompt_time() {
     symbols+="⌚"
   fi
 
-  prompt_segment_backwards 232 197 " $symbol  %*"
+  prompt_segment_backwards 234 197 " $symbols  %*"
 }
 
 ## R prompt
@@ -233,4 +233,4 @@ build_r_prompt() {
   prompt_end_backwards
 }
 
-RPROMPT='%{%f%b%k%}$(build_r_prompt) '
+RPROMPT='%{%f%b%k%}$(build_r_prompt)'
