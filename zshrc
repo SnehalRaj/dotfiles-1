@@ -50,10 +50,10 @@ ZSH_CUSTOM=~/dotfiles/zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bower git catimg debian pip sudo web-search zsh-syntax-highlighting)
+plugins=(bower catimg colored-man-pages colorize command-not-found cp debian docker emoji-clock gem git httpie npm pip sbt scala sudo tmux web-search wd zsh-syntax-highlighting)
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:.:/home/yash/bin:/usr/local/share/scala/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/yash/bin:/usr/local/share/scala/bin:/home/yash/git/arcanist/bin:."
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -99,4 +99,3 @@ elif [ -f ~/dotfiles/screenfetch ]; then
 fi
 
 BROWSER=iceweasel
-TERM=xterm-256color

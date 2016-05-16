@@ -220,7 +220,7 @@ prompt_time() {
   if [[ -n $SSH_CLIENT ]]; then
     symbols+=""
   else
-    symbols+="⌚"
+    symbols+=`emoji-clock`
   fi
 
   prompt_segment_backwards 234 197 " $symbols  %*"
