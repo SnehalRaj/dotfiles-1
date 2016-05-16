@@ -21,44 +21,89 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
 
+# Aligned position on screen
 alignment top_left
+# Fork conky to background
 background yes
-use_xft yes
-xftfont Inconsolata for Powerline.otf:size=10
-xftalpha 0.5
-border_width 1
-cpu_avg_samples 2
+# Inner border margin
+border_inner_margin 3
+# Outer border margin
+border_outer_margin 3
+# Border width in pixels
+border_width 2
+# Number of samples for average CPU
+cpu_avg_samples 10
+# Default color and border color
 default_color white
+# Default outline color
 default_outline_color green
+# Default shading color and border's shading color
 default_shade_color red
-draw_borders no
+# Use xdbe extension
+#double_buffer yes
+# Draw borders around text
+draw_borders yes
+# Draw borders around graphs
 draw_graph_borders no
+# Draw outline
 draw_outline no
+# Draw shade
 draw_shades no
-gap_x 12
-gap_y 48
-minimum_size 200 5
-maximum_width 210
-cpu_avg_samples 2
-no_buffers yes
-out_to_console no
-out_to_stderr no
+# Put extra newline
 extra_newline no
+# Human Readable?
+format_human_readable yes
+# Gap from Left or right
+gap_x 50
+# Gap from top or bottom
+gap_y 50
+# Max text width
+max_text_width 24
+# Maximum width
+maximum_width 210
+# Subtact buffers from used memmory?
+no_buffers yes
+# Print text to stdout?
+out_to_console no
+# Print using ncurses?
+out_to_ncurses no
+# Print to stderr
+out_to_stderr no
+# Force UTF-8 ??
+override_utf8_locale yes
+# Create own window?
 own_window no
+# Set WM_CLASS name
 own_window_class Conky
+# Color of own window
+own_window_colour 333333
+# Transparency
+own_window_transparent no
+# Type
 own_window_type desktop
-stippled_borders 0
-double_buffer yes
-update_interval 1.0
-uppercase no
-use_spacer none
-show_graph_scale no
+# Show time range covered by a graph
 show_graph_range no
+# Shows the maximum value in scaled graphs
+show_graph_scale no
+# Border stippling in pixels
+stippled_borders 0
+# Text buffer size
+text_buffer_size 512
+# Update Interval
+update_interval 2.0
+# Render all text in uppercase
+uppercase no
+# Add spaces to prevent movement
+use_spacer left
+# Use antialiased fonts
+use_xft yes
+# Alpha of xft font
+xftalpha 0.5
+# Xft font to use
+xftfont Cousine for Powerline:size=10
 
 TEXT
-$sysname $kernel on $machine
 
 Uptime: $alignr $uptime
 Frequency: $alignr $freq_g
@@ -76,7 +121,8 @@ $membar
 
 Swap $alignr $swapperc%
 ${swapbar}
+
 $hr
-$alignc ${execi 60 ~/dotfiles/xkcd_title.sh | fold -w30}
+$alignc ${execi 60 ~/dotfiles/xkcd_title.sh}
 $hr
-${execi 60 ~/dotfiles/xkcd_text.sh | fold -w30}
+${execi 60 ~/dotfiles/xkcd_text.sh}
