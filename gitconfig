@@ -8,6 +8,7 @@
   name = Yash Srivastav
 [core]
   editor = /usr/local/bin/nvim
+	excludesfile = ~/.cvsignore
 [diff]
   tool = vimdiff
 [color]
