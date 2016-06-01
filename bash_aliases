@@ -1,8 +1,8 @@
 #!/bin/bash
 ##############################################################################
 #   Filename: .bash_aliases                                                  #
-# Maintainer: Yash Srivastav <yash111998@gmail.com>                          #
-#        URL: http://github.com/yash111998/dotfiles                          #
+# Maintainer: Yash Srivastav <yashsriv01@gmail.com>                          #
+#        URL: http://github.com/yashsriv/dotfiles                            #
 #                                                                            #
 ##############################################################################
 # Allow sudo to be used by aliases

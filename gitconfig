@@ -9,6 +9,8 @@
 [core]
   editor = /usr/local/bin/nvim
 	excludesfile = ~/.cvsignore
+	autocrlf = input
+	safecrlf = true
 [diff]
   tool = vimdiff
 [color]

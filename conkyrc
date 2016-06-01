@@ -1,26 +1,17 @@
-# Conky, a system monitor, based on torsmo
-#
-# Any original torsmo code is licensed under the BSD license
-#
-# All code written since the fork of torsmo is licensed under the GPL
-#
-# Please see COPYING for details
-#
-# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
-# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
-# All rights reserved.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+###############################################################################################################
+#   Filename: .conkyrc                                                                                        #
+# Maintainer: Yash Srivastav <yashsriv01@gmail.com>                                                           #
+#        URL: http://github.com/yashsriv/dotfiles                                                             #
+#                                                                                                             #
+#                                                                                                             #
+# Sections:                                                                                                   #
+#   01. Basic Settings                                                                                        #
+#   02. Main Display                                                                                          #
+###############################################################################################################
+
+###############################################################################################################
+# 01. Basic settings                                                                                #
+###############################################################################################################
 
 # Aligned position on screen
 alignment top_left
@@ -103,6 +94,9 @@ xftalpha 0.5
 # Xft font to use
 xftfont Cousine for Powerline:size=10
 
+###############################################################################################################
+# 02. Main Display                                                                                  #
+###############################################################################################################
 TEXT
 
 Uptime: $alignr $uptime
@@ -121,8 +115,3 @@ $membar
 
 Swap $alignr $swapperc%
 ${swapbar}
-
-$hr
-$alignc ${execi 60 ~/dotfiles/xkcd_title.sh}
-$hr
-${execi 60 ~/dotfiles/xkcd_text.sh}

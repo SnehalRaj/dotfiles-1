@@ -2,7 +2,7 @@
 ###############################################################################################################
 #   Filename: .bashrc                                                                                         #
 # Maintainer: Yash Srivastav <yashsriv01@gmail.com>                                                           #
-#        URL: http://github.com/yashsriv/dotfiles                                                           #
+#        URL: http://github.com/yashsriv/dotfiles                                                             #
 #                                                                                                             #
 #                                                                                                             #
 # Sections:                                                                                                   #
