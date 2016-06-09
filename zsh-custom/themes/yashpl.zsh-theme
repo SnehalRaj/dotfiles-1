@@ -1,4 +1,5 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
+# Heavily inspired by nojhan/liquidprompt
 
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
@@ -82,31 +83,100 @@ prompt_end_backwards() {
 # Each component will draw itself, and hide itself if no information needs to be shown
 
 # Context: user@hostname (who am I and where am I)
+_connection() {
+  if [[ -n "${SSH_CLIENT-}${SSH2_CLIENT-}${SSH_TTY-}" ]]; then
+    echo ssh
+  else
+    local whoami="$(LANG=C who am i)"
+    local sess_parent="$(ps -o comm= -p $PPID 2> /dev/null)"
+    if [[ x"$whoami" != *'('* || x"$whoami" = *'(:'* || x"$whoami" = *'(tmux'* ]]; then
+      echo lcl  # Local
+    elif [[ "$sess_parent" = "su" || "$sess_parent" = "sudo" ]]; then
+      echo su   # Remote su/sudo
+    else
+      echo tel  # Telnet
+    fi
+  fi
+}
 prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment 154 16 "%(!.%{%F{yellow}%}.)%n"
+  HOST=""
+  [[ -r /etc/debian_chroot ]] && HOST="($(< /etc/debian_chroot))"
+  if [[ -n "$DISPLAY" ]]; then
+    HOST="${HOST}%{%F{blue}%}@"
+  else
+    HOST="${HOST}@"
+  fi
+
+  case "$(_connection)" in
+    ssh)
+      HOST+="%{%F{57}%}%m"
+      ;;
+    su)
+      HOST+="%{%F{97}%}%m"
+      ;;
+    tel)
+      HOST+="%{%F{red}%}%m"
+      ;;
+    *)
+      HOST=""
+      ;;
+  esac
+
+  if [[ $(tput cols) -ge 125 ]]; then
+    if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+      if [[ $UID -eq 0 ]]; then
+        prompt_segment default 16 "%(!.%{%F{red,bold}%}.)%n$HOST"
+      else
+        prompt_segment 154 16 "%(!.%{%F{red,bold}%}.)%n$HOST"
+      fi
+    fi
   fi
 }
 # Git: branch/detached head, dirty status
 prompt_git() {
   # Must use Powerline font, for \uE0A0 to render.
   if [[ -n "$SSH_CLIENT" ]]; then
-    ZSH_THEME_GIT_PROMPT_PREFIX=""
+    GIT_PROMPT_PREFIX=""
   else
-    ZSH_THEME_GIT_PROMPT_PREFIX="\uE0A0 "
+    GIT_PROMPT_PREFIX="\uE0A0 "
   fi
-  ZSH_THEME_GIT_PROMPT_SUFFIX=""
-  ZSH_THEME_GIT_PROMPT_DIRTY="!"
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="?"
-  ZSH_THEME_GIT_PROMPT_CLEAN=""
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    dirty=$(parse_git_dirty)
-    if [[ -n $dirty ]]; then
-      prompt_segment 214 16
-    else
-      prompt_segment 154 16
+    BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    STATUS=$(git status 2>&1 | tee)
+    dirty=$(echo -n "$STATUS" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+    untracked=$(echo -n "$STATUS" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+    ahead=$(echo -n "$STATUS" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+    newfile=$(echo -n "$STATUS" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+    renamed=$(echo -n "$STATUS" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+    deleted=$(echo -n "$STATUS" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
+    bits=""
+    if [[ "$renamed" == "0" ]]; then
+      bits+=">"
     fi
-    echo -n $(git_prompt_info)
+    if [[ "$ahead" == "0" ]]; then
+      bits+="*"
+    fi
+    if [[ "$newfile" == "0" ]]; then
+      bits+="+"
+    fi
+    if [[ "$untracked" == "0" ]]; then
+      bits+="?"
+    fi
+    if [[ "$deleted" == "0" ]]; then
+      bits+="x"
+    fi
+    if [[ "$dirty" == "0" ]]; then
+      bits+="!"
+    fi
+
+    if [[ $(tput cols) -lt 125 ]]; then
+      BRANCH=$BRANCH[0,5]
+    fi
+    if [[ ! "${bits}" == "" ]]; then
+      prompt_segment 214 16 "$GIT_PROMPT_PREFIX$BRANCH$bits"
+    else
+      prompt_segment 154 16 "$GIT_PROMPT_PREFIX$BRANCH$bits"
+    fi
   fi
 }
 # Dir: current working directory
@@ -128,12 +198,23 @@ prompt_virtualenv() {
 # - are there background jobs?
 prompt_status() {
   local symbols
-  symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+  symbols=""
+  local -i r s
+  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘ "
+  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡ "
+  local -i detached=0
+  detached+=$(tmux list-sessions 2> /dev/null | \grep -cv 'attached')
+  (( detached > 0 )) && symbols+="%{%F{154}%}${detached}⑂ "
+  if (( r = $(jobs -r | wc -l) )); then
+    symbols+="%{%F{cyan}%}${r}⚙ "
+  fi
+  if (( s = $(jobs -s | wc -l) )); then
+    symbols+="%{%F{yellow}%}${s}💤"
+  fi
 
-  [[ -n "$symbols" ]] && prompt_segment default default "$symbols"
+  if [[ $(tput cols) -ge 125 ]]; then
+    [[ -n "$symbols" ]] && prompt_segment 234 234 "$symbols"
+  fi
 }
 
 ## Main prompt
@@ -165,7 +246,7 @@ elif [ $(battery_level) -ge 20 ]; then
 else
   color=red
 fi
-echo %{$fg[$color]%}$(battery_level)%% 
+echo %{$fg[$color]%}$(battery_level)%%
 }
 function battery_is_charging() {
 if [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]]; then
@@ -197,17 +278,23 @@ prompt_battery() {
         color=118
         symbol="\u2615"
       elif [ $(battery_level) -ge 20 ]; then
-        color=202
+        color=208
         symbol="\u231B"
       else
-        color=208
+        color=196
         symbol="\u26A0"
       fi
     else
       symbol="\u26A1"
       color=38
     fi
-    prompt_segment_backwards $color 234 "$symbol $(battery_charge)"
+    if [[ $(tput cols) -gt 125 ]]; then
+      prompt_segment_backwards $color 234 "$symbol $(battery_charge)"
+    elif [[ $(battery_level) -ge 20 ]]; then
+      prompt_segment_backwards $color 234 "$symbol"
+    else
+      prompt_segment_backwards $color 234 "$symbol $(battery_level)%%"
+    fi
   fi
 }
 
@@ -223,11 +310,31 @@ prompt_time() {
     symbols+=`emoji-clock`
   fi
 
-  prompt_segment_backwards 234 197 " $symbols  %*"
+  if [[ $(tput cols) -gt 125 ]]; then
+    prompt_segment_backwards 234 197 " $symbols %*"
+  else
+    prompt_segment_backwards 234 197 " $symbols"
+  fi
+}
+
+# Cpu load
+prompt_cpu() {
+  local lp_cpu_load
+  local eol
+  read lp_cpu_load eol < /proc/loadavg
+  cpunum=$( nproc 2>/dev/null || \grep -c '^[Pp]rocessor' /proc/cpuinfo )
+  lp_cpu_load=${lp_cpu_load/./}   # Remove '.'
+  lp_cpu_load=${lp_cpu_load#0}    # Remove leading '0'
+  lp_cpu_load=${lp_cpu_load#0}    # Remove leading '0', again (ex: 0.09)
+  local -i load=${lp_cpu_load:-0}/$cpunum
+  if (( load > 65 )); then
+    prompt_segment_backwards 234 default "$symbol ⌂ ${load}%%"
+  fi
 }
 
 ## R prompt
 build_r_prompt() {
+  prompt_cpu
   prompt_battery
   prompt_time
   prompt_end_backwards
