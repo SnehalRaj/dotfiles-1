@@ -6,7 +6,7 @@
 # Allow sudo to be used by aliases
 alias sudo='sudo '
 # Get package
-alias getme='sudo apt-get install'
+alias getme='sudo apt install'
 # Execute previous command with sudo permissions
 alias wtf='sudo $(history -p !!)'
 # I accidentally type .. instead of cd ..
