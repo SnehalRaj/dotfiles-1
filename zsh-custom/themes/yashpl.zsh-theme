@@ -5,6 +5,7 @@
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
+CURRENT_BGR='NONE'
 
 # Special Powerline characters
 
@@ -59,24 +60,24 @@ prompt_segment_backwards() {
   local bg fg
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
-  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{%F{$1}%K{$CURRENT_BG}%}$SEGMENT_SEPARATOR_BACKWARDS%{$fg$bg%}"
+  if [[ $CURRENT_BGR != 'NONE' && $1 != $CURRENT_BGR ]]; then
+    echo -n " %{%F{$1}%K{$CURRENT_BGR}%}$SEGMENT_SEPARATOR_BACKWARDS%{$fg$bg%}"
   else
-    echo -n "%{%F{$1}%K{$2}%}$SEGMENT_SEPARATOR_BACKWARDS%{$bg%}%{$fg%} "
+    echo -n "%{%F{$1}%k%}$SEGMENT_SEPARATOR_BACKWARDS%{$bg%}%{$fg%} "
   fi
-  CURRENT_BG=$1
+  CURRENT_BGR=$1
   [[ -n $3 ]] && echo -n $3
 }
 
 # End the prompt, closing any open segments
 prompt_end_backwards() {
-  if [[ -n $CURRENT_BG ]]; then
-    echo -n "%{%k%F{$CURRENT_BG}%}"
+  if [[ -n $CURRENT_BGR ]]; then
+    echo -n "%{%k%F{$CURRENT_BGR}%}"
   else
     echo -n "%{%k%}"
   fi
   echo -n "%{%f%}"
-  CURRENT_BG=''
+  CURRENT_BGR=''
 }
 
 ### Prompt components
@@ -170,9 +171,11 @@ prompt_git() {
     fi
 
     if [[ $(tput cols) -lt 125 ]]; then
-      BRANCH=$BRANCH[0,5]
+      BRANCH=$BRANCH[0,6]
     fi
-    if [[ ! "${bits}" == "" ]]; then
+    if [[ "$ahead" == "0" ]]; then
+      prompt_segment 226 16 "$GIT_PROMPT_PREFIX$BRANCH$bits"
+    elif [[ ! "${bits}" == "" ]]; then
       prompt_segment 214 16 "$GIT_PROMPT_PREFIX$BRANCH$bits"
     else
       prompt_segment 154 16 "$GIT_PROMPT_PREFIX$BRANCH$bits"
@@ -313,7 +316,7 @@ prompt_time() {
   if [[ $(tput cols) -gt 125 ]]; then
     prompt_segment_backwards 234 197 " $symbols %*"
   else
-    prompt_segment_backwards 234 197 " $symbols"
+    prompt_segment_backwards 234 197 " $symbols  "
   fi
 }
 
