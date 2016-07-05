@@ -16,7 +16,7 @@ alias diskspace='du -S | sort -n -r |more'
 # Shortcut for git upload
 alias gpom='git push origin master'
 # IP Address ( actual and local)
-alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+#alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
 # ADB and fastboot
 alias adb='sudo /home/yash/adb/platform-tools/adb '
 alias fastboot='sudo /home/yash/adb/platform-tools/fastboot '
@@ -48,10 +48,12 @@ alias cassandra='sudo docker run --name ixchel-cassandra -p 9042:9042 cassandra'
 alias postgres='sudo docker run --name ixchel-db -e POSTGRES_PASSWORD=lehcxi -e POSTGRES_USER=ixchel -e POSTGRES_DB=IXCHEL -p 5432:5432 postgres'
 alias pgprompt='sudo docker exec -ti ixchel-db psql --username ixchel --password IXCHEL'
 alias csprompt='sudo docker run -it --link ixchel-cassandra:cassandra --rm cassandra cqlsh cassandra'
-alias setupdocker='sudo pkill docker && sudo docker daemon -g /media/yash/Extra/docker'
 alias rundocker='sudo docker daemon -g /media/yash/Extra/docker'
+alias archrundocker='sudo docker daemon -g /extra/docker'
 alias couchbase='sudo docker run -d -v ~/couchbase:/opt/couchbase/var --net=host couchbase/server'
 # Altium
 alias altium='DRI_PRIME=1 wine /home/yash/.wine/drive_c/Program\ Files/Altium/AD15/DXP.EXE'
 # Weather
 alias weather='curl wttr.in/kanpur'
+
+alias cp='rsync -ah --progress'
