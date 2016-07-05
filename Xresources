@@ -69,3 +69,25 @@ URxvt*color14 : #34E2E2
 ! white
 URxvt*color7  : #D3D7CF
 URxvt*color15 : #EEEEEC
+
+!!!! ROFI
+! rofi
+rofi.modi: window,run
+rofi.font: InconsolataForPowerline Nerd Font 15
+rofi.width: 50
+rofi.lines: 5
+rofi.columns: 1
+rofi.opacity: 100
+!                    bg       fg      altbg    hlbg     hlfg
+rofi.color-normal: #263238, #eeffff, #263238, #4883ff, #eeffff
+rofi.color-urgent: #263238, #eeffff, #263238, #4883ff, #eeffff
+rofi.color-active: #263238, #eeffff, #263238, #4883ff, #eeffff
+rofi.color-window: #263238, #4883ff, #4883ff
+rofi.bw: 4
+rofi.location: 0
+rofi.padding: 10
+rofi.fuzzy: true
+rofi.separator-style: solid
+rofi.hide-scrollbar: true
+rofi.auto-select: false
+rofi.terminal: st
