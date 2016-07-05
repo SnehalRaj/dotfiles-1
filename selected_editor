@@ -4,4 +4,4 @@
 #        URL: http://github.com/yashsriv/dotfiles   #
 #                                                   #
 #####################################################
-SELECTED_EDITOR="/usr/local/bin/nvim"
+SELECTED_EDITOR="/usr/bin/env nvim"
