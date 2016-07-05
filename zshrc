@@ -54,9 +54,12 @@ plugins=(bower catimg colored-man-pages colorize command-not-found cp debian doc
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/yash/bin:/usr/local/share/scala/bin:/home/yash/git/arcanist/bin:/usr/local/lib:."
+export PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:$PATH
 export JAVA_LIBRARY_PATH="/usr/local/lib"
 export LD_LIBRARY_PATH=/usr/local/lib
 # export MANPATH="/usr/local/man:$MANPATH"
+
+source /etc/profile.d/perlbin.sh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -65,9 +68,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -85,19 +88,32 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+unsetopt nomatch
+
 # Run ScreenFetch and fortune on start
 if [ -f /usr/bin/screenfetch -o -f /bin/screenfetch ]; then
   fortune -s
   echo ''
   tput rmam
-  screenfetch -c 154,
+  printf '\033[?7l'
+  screenfetch
+  printf '\033[?7h'
   tput smam
 elif [ -f ~/dotfiles/screenfetch ]; then
   fortune -s
   echo ''
   tput rmam
-  ~/dotfiles/screenfetch -c 154,
+  printf '\033[?7l'
+  ~/dotfiles/screenfetch
+  printf '\033[?7h'
   tput smam
 fi
 
 BROWSER=iceweasel
+export COOKIE="Cookie:auth=37441B2C54EE6C43875DCAA60BBD7F228C149CA9; timestamp=1465921399; id=yashsriv"
+export COOKIE2="Cookie:auth=F804E2CC867278D2D42ABCEEE34FE5B388236662; timestamp=1466108340; id=srivyash2"
+
+export ARCHCOOKIE="Cookie:auth=602B1692141F8A94329FDDC820E532EAC672A679; timestamp=1466680544; id=yashsriv"
+export ARCHCOOKIE2="Cookie:auth=0F89CC891030C76D7ABF8794C8880971CAA733FF; timestamp=1466680667; id=srivyash"
+
+export GMANTRA="Cookie:auth=449BCF3E4C74A1400090DA4D372F3FD45462E032; timestamp=1467121036; id=qwerty"
