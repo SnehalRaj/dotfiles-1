@@ -7,10 +7,10 @@
   email = yashsriv01@gmail.com
   name = Yash Srivastav
 [core]
-  editor = /usr/local/bin/nvim
-	excludesfile = ~/.cvsignore
-	autocrlf = input
-	safecrlf = true
+  editor = nvim
+  excludesfile = ~/.cvsignore
+  #autocrlf = input
+  #safecrlf = true
 [diff]
   tool = vimdiff
 [color]
