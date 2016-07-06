@@ -17,14 +17,14 @@ My i3 uses `rofi` as the application launcher and `i3blocks` for the `i3bar` ins
 I also use `i3-gaps` and `i3-blocks-gaps` instead of the usual i3 utilities.  
 My i3lock is forked from [here](http://github.com/Lixxia/i3lock) for a better display.  
 My terminal is [st](http://st.suckless.org)  
-Music Player - cmus
-Gtk Theme - Arc Darker Theme
-Browser - Firefox with Pentadactyl and Arc Darker Theme
+Music Player - cmus  
+Gtk Theme - Arc Darker Theme  
+Browser - Firefox with Pentadactyl and Arc Darker Theme  
 
 Also contains:
-oh-my-zsh folder and zsh-custom folder and some shell scripts
+oh-my-zsh folder and zsh-custom folder and some shell scripts  
 My zsh-custom contains a custom theme which is heavily inspired by liquid prompt
-and adjusts itself as per width of the terminal. Displaying lots of data on a larger
+and adjusts itself as per width of the terminal, displaying lots of data on a larger
 terminal and lesser data on a smaller terminal.
 
 * install.sh : installs my dotfiles
