@@ -314,7 +314,7 @@ prompt_time() {
   fi
 
   if [[ $(tput cols) -gt 125 ]]; then
-    prompt_segment_backwards 234 197 " $symbols %*"
+    prompt_segment_backwards 234 197 " $symbols  %*"
   else
     prompt_segment_backwards 234 197 " $symbols  "
   fi

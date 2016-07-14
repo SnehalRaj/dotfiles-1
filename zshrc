@@ -1,11 +1,26 @@
-# Path to your oh-my-zsh installation.
+[[ $- != *i* ]] && return
 export ZSH=~/dotfiles/oh-my-zsh
+case $(tty) in
+  /dev/tty[0-9]*)
+    ZSH_THEME="yash"
+    ;;
+  *)
+    if [[ -z "$TMUX" ]]; then
+      (tmux attach-session -t main 2> /dev/null || tmux new-session -s main) && exit
+    fi
+    if [[ -n "$SSH_CLIENT" ]]; then
+      ZSH_THEME="yash"
+    else
+      ZSH_THEME="yashpl"
+    fi
+    ;;
+esac
+# Path to your oh-my-zsh installation.
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="yashpl"
 
 
 # Uncomment the following line to use case-sensitive completion.
