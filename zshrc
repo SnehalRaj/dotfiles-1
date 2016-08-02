@@ -6,7 +6,8 @@ case $(tty) in
     ;;
   *)
     if [[ -z "$TMUX" ]]; then
-      (tmux attach-session -t main 2> /dev/null || tmux new-session -s main) && exit
+      #(tmux attach-session -t main 2> /dev/null || tmux new-session -s main) && exit
+      tmux new-session && exit
     fi
     if [[ -n "$SSH_CLIENT" ]]; then
       ZSH_THEME="yash"
