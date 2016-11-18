@@ -1,7 +1,3 @@
-[submodule "oh-my-zsh"]
-  path = oh-my-zsh
-  url = http://github.com/robbyrussell/oh-my-zsh.git
-
 [submodule "vim"]
   path = vim
   url = git@github.com:yashsriv/vim-bar.git
