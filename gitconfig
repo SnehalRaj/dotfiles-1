@@ -4,14 +4,15 @@
 #        URL: http://github.com/yashsriv/dotfiles        #
 ##########################################################
 [user]
-  email = yashsriv01@gmail.com
+  email = yash111998@gmail.com
   name = Yash Srivastav
+  signingkey = 67A09FFAC003E189
 [core]
   editor = nvim
   excludesfile = ~/.cvsignore
-  #autocrlf = input
-  #safecrlf = true
 [diff]
   tool = vimdiff
 [color]
   ui = true
+[pull]
+  rebase = true
