@@ -1,0 +1,118 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 0 0 612 792
+%%Title: 
+%%Creator: gpg-key2ps 882
+%%CreationDate: Mon Dec  5 00:43:15 2016
+%%Pages: 1
+%%EndComments
+
+%%Page: 1 1
+
+/w 612 def
+/h 792 def
+
+/reencode {
+	exch findfont
+	dup length dict
+	begin {
+		1 index /FID eq
+		{ pop pop }
+		{ def } ifelse
+	} forall
+	/Encoding ISOLatin1Encoding def
+	currentdict
+	end
+	definefont
+} bind def
+
+/Times-Roman /trlatin1 reencode 9 scalefont setfont
+
+/newline {
+	/y y 10 sub def
+} def
+
+/hline {
+	30 y 3 add moveto
+	w 2 div 30 sub y 3 add lineto stroke
+	newline
+} def
+
+/needhline {
+	/condhline { hline } def
+} def
+
+/noneedhline {
+	/condhline { } def
+} def
+
+/showAlgorithm {
+  << 1 (R) 2 (r) 3 (s) 16 (g) 20 (G) 17 (D) >> exch get
+  show
+} def
+
+/pub {
+	condhline
+	50 y moveto (pub) show
+	70 y moveto show showAlgorithm (/) show show
+	150 y moveto show
+	200 y moveto show
+	newline
+	needhline
+} def
+
+/fpr {
+	70 y moveto (Key fingerprint = ) show show
+	newline
+} def
+
+/uid {
+	50 y moveto (uid) show
+	200 y moveto show
+	newline
+} def
+
+/sbk {
+	50 y moveto (sub) show
+	70 y moveto show showAlgorithm (/) show show
+	150 y moveto show
+	newline
+} def
+
+
+/key {
+	noneedhline
+	() (1473433771) (C003E189) 1 (2048) pub
+
+	(771D 4FF3 BC06 AEAA E12F  94EE 67A0 9FFA C003 E189) fpr
+
+	(Yash Srivastav <yash111998@gmail.com>) uid
+
+} def
+
+/numlines 4 def
+/num w 16 sub 10 div numlines div def
+
+/column {
+	/y w 20 sub def
+	1 1 num {
+		gsave
+		0 0 h 2 div w rectclip
+		/upper y 11 add def
+		key
+		newline
+		/lower y 11 add def
+		0 upper h 2 div upper h 2 div lower 0 lower 0 upper moveto lineto lineto lineto lineto stroke
+		grestore
+	} for
+} def
+
+w 0 translate
+90 rotate
+column
+h 2 div 0 translate
+column
+
+showpage
+
+%%Trailer
+%%EOF
