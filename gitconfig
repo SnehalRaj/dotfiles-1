@@ -4,11 +4,11 @@
 #        URL: http://github.com/yashsriv/dotfiles        #
 ##########################################################
 [user]
-  email = yash111998@gmail.com
+  email = admin@yashsriv.org
   name = Yash Srivastav
   signingkey = 67A09FFAC003E189
 [core]
-  editor = nvim
+  editor = emacsclient -t -a 'vim'
   excludesfile = ~/.cvsignore
 [diff]
   tool = vimdiff
@@ -18,3 +18,7 @@
   rebase = true
 [commit]
   gpgsign = true
+[http]
+	followRedirects = true
+[http "https://gopkg.in"]
+	followRedirects = true
