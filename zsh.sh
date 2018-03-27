@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Battery level
-level=$(acpi | grep -o "[0-9]*%" | sed 's/%$//')
+level=$(acpi | grep -o "[0-9]*%" | sed 's/%$//' | tail -n 1)
 # No. of full bars
 full=$(( ($level+10)/20 ))
 # No. of empty bars

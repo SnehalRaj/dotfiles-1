@@ -72,7 +72,7 @@ URxvt*color15 : #EEEEEC
 
 !!!! ROFI
 ! rofi
-rofi.modi: window,run
+rofi.modi: window,run,drun
 rofi.font: InconsolataForPowerline Nerd Font 15
 rofi.width: 50
 rofi.lines: 5
