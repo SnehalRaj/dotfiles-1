@@ -4,76 +4,10 @@
 !                                                                        !
 ! My Xresources for urxvt                                                !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-URxvt*font: xft:InconsolataForPowerline Nerd Font:size=14:antialias=true
-URxvt*depth: 32
-URxvt*background: rgba:0000/0000/0200/c800
-URxvt*foreground: white
-URxvt*borderless: 1
-URxvt*scrollBar: false
-URxvt*scrollBar_right: false
-URxvt*saveLines: 10000
-URxvt*tintColor: grey
-URxvt*shading: 40
-URxvt*termName: rxvt-unicode-256color
-! Xft Settings
-Xft.dpi: 100
-Xft.antialias: true
-Xft.rgba: rgb
-Xft.hinting: true
-Xft.hintstyle: full
-! do not scroll with output
-URxvt*scrollTtyOutput: false
-
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
-
-! scroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
-
-URxvt*secondaryScreen: 1
-URxvt*secondaryScroll: 0
-
-
-URxvt*buffered: true
-URxvt*cursorBlink: true
-URxvt*underlineColor: yellow
-
-
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-
-URxvt.keysym.Shift-Control_L-C: perl:clipboard:copy
-URxvt.keysym.Shift-Control_L-V: perl:clipboard:paste
-
-! black
-URxvt*color0  : #2E3436
-URxvt*color8  : #555753
-! red
-URxvt*color1  : #CC0000
-URxvt*color9  : #EF2929
-! green
-URxvt*color2  : #4E9A06
-URxvt*color10 : #8AE234
-! yellow
-URxvt*color3  : #C4A000
-URxvt*color11 : #FCE94F
-! blue
-URxvt*color4  : #3465A4
-URxvt*color12 : #729FCF
-! magenta
-URxvt*color5  : #75507B
-URxvt*color13 : #AD7FA8
-! cyan
-URxvt*color6  : #06989A
-URxvt*color14 : #34E2E2
-! white
-URxvt*color7  : #D3D7CF
-URxvt*color15 : #EEEEEC
-
 !!!! ROFI
 ! rofi
 rofi.modi: window,run,drun
-rofi.font: InconsolataForPowerline Nerd Font 15
+rofi.font: Source Code Pro 15
 rofi.width: 50
 rofi.lines: 5
 rofi.columns: 1
