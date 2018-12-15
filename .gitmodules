@@ -9,3 +9,7 @@
 [submodule "zsh-syntax-highlighting"]
   path = zsh-custom/plugins/zsh-syntax-highlighting
   url = git@github:zsh-users/zsh-syntax-highlighting
+
+[submodule "awesome"]
+	path = awesome
+	url = git@github.com:yashsriv/awesome-config.git
