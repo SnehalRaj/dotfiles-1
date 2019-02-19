@@ -1,0 +1,13 @@
+# -*- mode: conf -*-
+# /usr/share/xsessions/awesome-gnome.desktop
+
+[Desktop Entry]
+Name=GNOME + Awesome
+Comment=This session logs you into GNOME with awesome as the window manager
+Exec=gnome-session --session=awesome-gnome
+TryExec=awesome-gnome
+Icon=
+Type=Application
+DesktopNames=Unity
+X-Ubuntu-Gettext-Domain=gnome-session-3.0
+Type=XSession
